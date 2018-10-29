@@ -80,6 +80,14 @@ extern "C"
  * This is done so that the length limit can be treated as a warning rather
  * than an error if desired.
  *
+ * <hr>
+ * Attribute          | Adherence
+ * ------------------ | -------------
+ * Allocates Memory   | No
+ * Thread-Safe        | Yes
+ * Uses Atomics       | No
+ * Lock-Free          | Yes
+ *
  * \param[in] namespace_ namespace to be validated
  * \param[out] validation_result int in which the result of the check is stored
  * \param[out] invalid_index index of the input string where an error occurred
@@ -100,6 +108,14 @@ rmw_validate_namespace(
  * This is an overload with an extra parameter for the length of namespace_.
  * \param[in] namespace_length The number of characters in namespace_.
  *
+ * <hr>
+ * Attribute          | Adherence
+ * ------------------ | -------------
+ * Allocates Memory   | No
+ * Thread-Safe        | Yes
+ * Uses Atomics       | No
+ * Lock-Free          | Yes
+ *
  * \sa rmw_validate_namespace(const char *, int *, size_t *)
  */
 RMW_PUBLIC
@@ -112,6 +128,15 @@ rmw_validate_namespace_with_size(
   size_t * invalid_index);
 
 /// Return a validation result description, or NULL if unknown or RMW_NAMESPACE_VALID.
+/**
+ * <hr>
+ * Attribute          | Adherence
+ * ------------------ | -------------
+ * Allocates Memory   | No
+ * Thread-Safe        | Yes
+ * Uses Atomics       | No
+ * Lock-Free          | Yes
+ */
 RMW_PUBLIC
 RMW_WARN_UNUSED
 const char *

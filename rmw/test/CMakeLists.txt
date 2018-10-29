@@ -1,4 +1,8 @@
 find_package(ament_cmake_gmock REQUIRED)
+find_package(osrf_testing_tools_cpp REQUIRED)
+
+get_target_property(extra_env_vars
+  osrf_testing_tools_cpp::memory_tools LIBRARY_PRELOAD_ENVIRONMENT_VARIABLE)
 
 ament_add_gmock(test_serialized_message
   test_serialized_message.cpp
@@ -11,29 +15,41 @@ endif()
 
 ament_add_gmock(test_validate_full_topic_name
   test_validate_full_topic_name.cpp
+  ENV ${extra_env_vars}
   # Append the directory of librmw so it is found at test time.
   APPEND_LIBRARY_DIRS "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
 )
 if(TARGET test_validate_full_topic_name)
-  target_link_libraries(test_validate_full_topic_name ${PROJECT_NAME})
+  target_link_libraries(test_validate_full_topic_name
+    ${PROJECT_NAME}
+    osrf_testing_tools_cpp::memory_tools
+  )
 endif()
 
 ament_add_gmock(test_validate_node_name
   test_validate_node_name.cpp
+  ENV ${extra_env_vars}
   # Append the directory of librmw so it is found at test time.
   APPEND_LIBRARY_DIRS "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
 )
 if(TARGET test_validate_node_name)
-  target_link_libraries(test_validate_node_name ${PROJECT_NAME})
+  target_link_libraries(test_validate_node_name
+    ${PROJECT_NAME}
+    osrf_testing_tools_cpp::memory_tools
+  )
 endif()
 
 ament_add_gmock(test_validate_namespace
   test_validate_namespace.cpp
+  ENV ${extra_env_vars}
   # Append the directory of librmw so it is found at test time.
   APPEND_LIBRARY_DIRS "$<TARGET_FILE_DIR:${PROJECT_NAME}>"
 )
 if(TARGET test_validate_namespace)
-  target_link_libraries(test_validate_namespace ${PROJECT_NAME})
+  target_link_libraries(test_validate_namespace
+    ${PROJECT_NAME}
+    osrf_testing_tools_cpp::memory_tools
+  )
   if(UNIX AND NOT APPLE)
     target_link_libraries(test_validate_namespace pthread)
   endif()

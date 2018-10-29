@@ -22,8 +22,9 @@ extern "C"
 
 #include <stddef.h>
 
-#include "rcutils/allocator.h"
 #include "rcutils/types.h"
+
+#include "rmw/allocator.h"
 #include "rmw/macros.h"
 #include "rmw/types.h"
 #include "rmw/visibility_control.h"
@@ -69,7 +70,7 @@ rmw_ret_t
 rmw_names_and_types_init(
   rmw_names_and_types_t * names_and_types,
   size_t size,
-  rcutils_allocator_t * allocator);
+  rmw_allocator_t * allocator);
 
 /// Finalize a rmw_names_and_types_t object.
 /**

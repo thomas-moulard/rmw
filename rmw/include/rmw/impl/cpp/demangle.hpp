@@ -24,8 +24,6 @@
 #include <iostream>
 #include <string>
 
-#include "rmw/impl/config.h"
-
 namespace rmw
 {
 namespace impl
@@ -40,7 +38,7 @@ demangle(const T & instance)
 {
   (void)instance;
 // Cannot do demangling if on Windows or if we want to avoid memory allocation.
-#if !defined(_WIN32) || RMW_AVOID_MEMORY_ALLOCATION
+#if !defined(_WIN32)
   int status = 0;
   std::string mangled_typeid_name = typeid(T).name();
 

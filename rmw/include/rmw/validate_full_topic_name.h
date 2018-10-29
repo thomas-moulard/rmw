@@ -74,6 +74,14 @@ extern "C"
  * This is done so that the length limit can be treated as a warning rather
  * than an error if desired.
  *
+ * <hr>
+ * Attribute          | Adherence
+ * ------------------ | -------------
+ * Allocates Memory   | No
+ * Thread-Safe        | Yes
+ * Uses Atomics       | No
+ * Lock-Free          | Yes
+ *
  * \param[in] topic_name topic name to be validated
  * \param[out] validation_result int in which the result of the check is stored
  * \param[out] invalid_index size_t index of the input string where an error occurred
@@ -94,6 +102,14 @@ rmw_validate_full_topic_name(
  * This is an overload with an extra parameter for the length of topic_name.
  * \param[in] topic_name_length The number of characters in topic_name.
  *
+ * <hr>
+ * Attribute          | Adherence
+ * ------------------ | -------------
+ * Allocates Memory   | No
+ * Thread-Safe        | Yes
+ * Uses Atomics       | No
+ * Lock-Free          | Yes
+ *
  * \sa rmw_validate_full_topic_name(const char *, int *, size_t *)
  */
 RMW_PUBLIC
@@ -106,6 +122,15 @@ rmw_validate_full_topic_name_with_size(
   size_t * invalid_index);
 
 /// Return a validation result description, or NULL if unknown or RMW_TOPIC_VALID.
+/**
+ * <hr>
+ * Attribute          | Adherence
+ * ------------------ | -------------
+ * Allocates Memory   | No
+ * Thread-Safe        | Yes
+ * Uses Atomics       | No
+ * Lock-Free          | Yes
+ */
 RMW_PUBLIC
 RMW_WARN_UNUSED
 const char *

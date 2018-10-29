@@ -90,6 +90,7 @@ extern "C"
 #include "rosidl_generator_c/message_type_support_struct.h"
 #include "rosidl_generator_c/service_type_support_struct.h"
 
+#include "rmw/allocator.h"
 #include "rmw/macros.h"
 #include "rmw/qos_profiles.h"
 #include "rmw/types.h"
@@ -129,7 +130,8 @@ rmw_create_node(
   const char * name,
   const char * namespace_,
   size_t domain_id,
-  const rmw_node_security_options_t * security_options);
+  const rmw_node_security_options_t * security_options,
+  rmw_allocator_t allocator);
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -176,7 +178,8 @@ rmw_create_publisher(
   const rmw_node_t * node,
   const rosidl_message_type_support_t * type_support,
   const char * topic_name,
-  const rmw_qos_profile_t * qos_policies);
+  const rmw_qos_profile_t * qos_policies,
+  rmw_allocator_t allocator);
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -205,7 +208,9 @@ RMW_PUBLIC
 RMW_WARN_UNUSED
 rmw_ret_t
 rmw_publish_serialized_message(
-  const rmw_publisher_t * publisher, const rmw_serialized_message_t * serialized_message);
+  const rmw_publisher_t * publisher,
+  const rmw_serialized_message_t * serialized_message,
+  rmw_allocator_t allocator);
 
 /// Serialize a ROS message into a rmw_serialized_message_t.
 /**
@@ -226,7 +231,7 @@ rmw_ret_t
 rmw_serialize(
   const void * ros_message,
   const rosidl_message_type_support_t * type_support,
-  rmw_serialized_message_t * serialized_message);
+  rmw_serialized_message_t * serialized_message); ??
 
 /// Deserialize a ROS message.
 /**
@@ -250,7 +255,7 @@ rmw_ret_t
 rmw_deserialize(
   const rmw_serialized_message_t * serialized_message,
   const rosidl_message_type_support_t * type_support,
-  void * ros_message);
+  void * ros_message); ??
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -260,7 +265,8 @@ rmw_create_subscription(
   const rosidl_message_type_support_t * type_support,
   const char * topic_name,
   const rmw_qos_profile_t * qos_policies,
-  bool ignore_local_publications);
+  bool ignore_local_publications,
+  rmw_allocator_t allocator);
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -270,7 +276,7 @@ rmw_destroy_subscription(rmw_node_t * node, rmw_subscription_t * subscription);
 RMW_PUBLIC
 RMW_WARN_UNUSED
 rmw_ret_t
-rmw_take(const rmw_subscription_t * subscription, void * ros_message, bool * taken);
+rmw_take(const rmw_subscription_t * subscription, void * ros_message, bool * taken); ??
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -279,7 +285,7 @@ rmw_take_with_info(
   const rmw_subscription_t * subscription,
   void * ros_message,
   bool * taken,
-  rmw_message_info_t * message_info);
+  rmw_message_info_t * message_info); ??
 
 /// Take a message without deserializing it.
 /**
@@ -303,7 +309,7 @@ rmw_ret_t
 rmw_take_serialized_message(
   const rmw_subscription_t * subscription,
   rmw_serialized_message_t * serialized_message,
-  bool * taken);
+  bool * taken); ??
 
 /// Take a message without deserializing it and with its additional message information.
 /**
@@ -325,7 +331,7 @@ rmw_take_serialized_message_with_info(
   const rmw_subscription_t * subscription,
   rmw_serialized_message_t * serialized_message,
   bool * taken,
-  rmw_message_info_t * message_info);
+  rmw_message_info_t * message_info); ??
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -334,7 +340,8 @@ rmw_create_client(
   const rmw_node_t * node,
   const rosidl_service_type_support_t * type_support,
   const char * service_name,
-  const rmw_qos_profile_t * qos_policies);
+  const rmw_qos_profile_t * qos_policies,
+  rmw_allocator_t allocator);
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -347,7 +354,7 @@ rmw_ret_t
 rmw_send_request(
   const rmw_client_t * client,
   const void * ros_request,
-  int64_t * sequence_id);
+  int64_t * sequence_id); ??
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -356,7 +363,7 @@ rmw_take_response(
   const rmw_client_t * client,
   rmw_request_id_t * request_header,
   void * ros_response,
-  bool * taken);
+  bool * taken); ??
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -365,7 +372,8 @@ rmw_create_service(
   const rmw_node_t * node,
   const rosidl_service_type_support_t * type_support,
   const char * service_name,
-  const rmw_qos_profile_t * qos_policies);
+  const rmw_qos_profile_t * qos_policies,
+  rmw_allocator_t allocator);
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -379,7 +387,7 @@ rmw_take_request(
   const rmw_service_t * service,
   rmw_request_id_t * request_header,
   void * ros_request,
-  bool * taken);
+  bool * taken); ??
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -387,12 +395,12 @@ rmw_ret_t
 rmw_send_response(
   const rmw_service_t * service,
   rmw_request_id_t * request_header,
-  void * ros_response);
+  void * ros_response); ??
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
 rmw_guard_condition_t *
-rmw_create_guard_condition(void);
+rmw_create_guard_condition(rmw_allocator_t allocator);
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -417,7 +425,7 @@ rmw_trigger_guard_condition(const rmw_guard_condition_t * guard_condition);
 RMW_PUBLIC
 RMW_WARN_UNUSED
 rmw_wait_set_t *
-rmw_create_wait_set(size_t max_conditions);
+rmw_create_wait_set(size_t max_conditions, rmw_allocator_t allocator);
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -467,7 +475,7 @@ rmw_wait(
   rmw_services_t * services,
   rmw_clients_t * clients,
   rmw_wait_set_t * wait_set,
-  const rmw_time_t * wait_timeout);
+  const rmw_time_t * wait_timeout); ??
 
 /// Return a list of node name and namespaces discovered via a node.
 /**
@@ -502,7 +510,8 @@ rmw_ret_t
 rmw_get_node_names(
   const rmw_node_t * node,
   rcutils_string_array_t * node_names,
-  rcutils_string_array_t * node_namespaces);
+  rcutils_string_array_t * node_namespaces,
+  rmw_allocator_t allocator);
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -510,7 +519,7 @@ rmw_ret_t
 rmw_count_publishers(
   const rmw_node_t * node,
   const char * topic_name,
-  size_t * count);
+  size_t * count); ??
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
@@ -518,12 +527,12 @@ rmw_ret_t
 rmw_count_subscribers(
   const rmw_node_t * node,
   const char * topic_name,
-  size_t * count);
+  size_t * count); ??
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
 rmw_ret_t
-rmw_get_gid_for_publisher(const rmw_publisher_t * publisher, rmw_gid_t * gid);
+rmw_get_gid_for_publisher(const rmw_publisher_t * publisher, rmw_gid_t * gid); ??
 
 RMW_PUBLIC
 RMW_WARN_UNUSED

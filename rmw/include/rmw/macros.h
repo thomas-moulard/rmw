@@ -21,4 +21,14 @@
 
 #define RMW_WARN_UNUSED RCUTILS_WARN_UNUSED
 
+#ifdef __cplusplus
+# define RMW_DEPRECATED(msg) [[deprecated(msg)]]
+#else
+# if defined(__GNUC__)
+#   define RMW_DEPRECATED(msg) __attribute__ ((deprecated))
+# elif defined(_MSC_VER)
+#   define RMW_DEPRECATED(msg) __declspec(deprecated)
+# endif
+#endif
+
 #endif  // RMW__MACROS_H_

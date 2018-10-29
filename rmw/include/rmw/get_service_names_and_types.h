@@ -20,6 +20,7 @@ extern "C"
 {
 #endif
 
+#include "rmw/allocator.h"
 #include "rmw/macros.h"
 #include "rmw/names_and_types.h"
 #include "rmw/types.h"
@@ -52,7 +53,7 @@ RMW_WARN_UNUSED
 rmw_ret_t
 rmw_get_service_names_and_types(
   const rmw_node_t * node,
-  rcutils_allocator_t * allocator,
+  rmw_allocator_t * allocator,
   rmw_names_and_types_t * service_names_and_types);
 
 #ifdef __cplusplus

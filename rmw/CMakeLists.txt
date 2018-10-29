@@ -25,9 +25,7 @@ include(cmake/configure_rmw_library.cmake)
 include_directories(include)
 
 set(rmw_sources
-  "src/allocators.c"
   "src/convert_rcutils_ret_to_rmw_ret.c"
-  "src/error_handling.c"
   "src/names_and_types.c"
   "src/sanity_checks.c"
   "src/node_security_options.c"

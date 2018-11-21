@@ -86,6 +86,18 @@ typedef struct RMW_PUBLIC_TYPE rmw_guard_condition_t
   void * data;
 } rmw_guard_condition_t;
 
+typedef struct RMW_PUBLIC_TYPE rmw_publisher_allocation_t
+{
+  const char * implementation_identifier;
+  void * data;
+} rmw_publisher_allocation_t;
+
+typedef struct RMW_PUBLIC_TYPE rmw_subscription_allocation_t
+{
+  const char * implementation_identifier;
+  void * data;
+} rmw_subscription_allocation_t;
+
 /// Array of subsciber handles.
 /**
  * An array of void * pointers representing type-erased middleware-specific subscriptions.

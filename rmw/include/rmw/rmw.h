@@ -218,7 +218,8 @@ rmw_publish_serialized_message(
 
 RMW_PUBLIC
 RMW_WARN_UNUSED
-rmw_ret_t rmw_get_serialized_message_size(
+rmw_ret_t
+rmw_get_serialized_message_size(
   const rosidl_message_bounds_t * message_bounds,
   const rosidl_message_type_support_t * type_support,
   size_t * size);
